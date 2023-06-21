@@ -12,7 +12,8 @@ import java.util.UUID;
 public class DraftService {
     @Autowired
     DraftRepository draftRepository;
-    public void saveDraft(String title,String content) {
+
+    public void saveDraft(String title, String content) {
         Draft draft = new Draft();
         draft.setContent(content);
         draft.setTitle(title);
@@ -28,13 +29,27 @@ public class DraftService {
     }
 
     public Draft getDraftById(UUID draftId) {
-       return draftRepository.findById(draftId).get();
+        return draftRepository.findById(draftId).get();
     }
 
     public void updateDraftById(UUID draftId, String title, String content) {
         Draft existingDraft = draftRepository.findById(draftId).get();
         existingDraft.setTitle(title);
         existingDraft.setContent(content);
+        draftRepository.save(existingDraft);
+    }
+
+    public void draftPostUrl(String title, String url) {
+        Draft draft = new Draft();
+        draft.setTitle(title);
+        draft.setDraftUrl(url);
+        draftRepository.save(draft);
+    }
+
+    public void updateDraftLink(String title, String url, UUID draftId) {
+        Draft existingDraft = draftRepository.findById(draftId).get();
+        existingDraft.setTitle(title);
+        existingDraft.setDraftUrl(url);
         draftRepository.save(existingDraft);
     }
 }
