@@ -36,26 +36,41 @@ public class PostController {
         return "create-post";
     }
 
-    @PostMapping("/save-post")
-    public String fileUpload(@RequestParam(value = "draft",required = false)String draft,
-                             @RequestParam(value = "title")String title,
-                             @RequestParam(value = "image",required = false) List<MultipartFile> images,
-                             @RequestParam(value = "content",required = false) String content,
-                             @RequestParam(value = "url",required = false) String url,
-                             @RequestParam(value = "poll",required = false) String poll,
-                             @RequestParam(value = "draftId",required = false) UUID draftId,
-                             Model model){
-        if(draftId!=null){
-            draftController.updateDraft(draftId,title,content);
+     @PostMapping("/save-post")
+    public String fileUpload(@RequestParam(value = "draft", required = false) String draft,
+                             @RequestParam(value = "link draft", required = false) String linkDraft,
+                             @RequestParam(value = "post-draft", required = false) String postDraft,
+                             @RequestParam(value = "title") String title,
+                             @RequestParam(value = "image", required = false) List<MultipartFile> images,
+                             @RequestParam(value = "content", required = false) String content,
+                             @RequestParam(value = "url", required = false) String url,
+                             @RequestParam(value = "poll", required = false) String poll,
+                             @RequestParam(value = "draftId", required = false) UUID draftId,
+                             @RequestParam(value = "update draft", required = false) String updateDraftLink,
+                             @RequestParam(value = "cancel",required = false)String cancelButton,
+                             Model model) {
+        if(cancelButton!=null && (!cancelButton.isEmpty())){
+            return "redirect:/view-post/page";
+        }
+        else if (updateDraftLink != null && updateDraftLink.equals("update Draft")) {
+            draftService.updateDraftLink(title, url, draftId);
             return "redirect:/draft";
-        }
-        else if(draft!=null && !draft.isEmpty()){
-            draftController.saveDraftPost(title,content,model);
+        } else if (linkDraft != null && linkDraft.equals("save Draft")) {
+            draftService.draftPostUrl(title, url);
+            return "redirect:/draft";
+        } else if (postDraft != null && postDraft.equals("Post")) {
+            postService.saveDraftedPost(title, content, draftId, url);
+            draftService.deleteDraftById(draftId);
+            return "file-response";
+        } else if (draftId != null) {
+            draftController.updateDraft(draftId, title, content);
+            return "redirect:/draft";
+        } else if (draft != null && !draft.isEmpty()) {
+            draftController.saveDraftPost(title, content, model);
             List<Draft> draftPosts = draftService.findAllDraftedPosts();
-            model.addAttribute("draftedPosts",draftPosts);
+            model.addAttribute("draftedPosts", draftPosts);
             return "draft";
-        }
-        else {
+        } else {
             if ((images != null && (!images.isEmpty())) && (url != null && (!url.isEmpty())) && (content != null
                     && (!content.isEmpty()))) {
                 List<Media> savedMediaList = fileService.uploadImage(path, images);
