@@ -16,31 +16,34 @@ public class DraftController {
     DraftService draftService;
 
     @GetMapping("/draft")
-    public String viewDraft(Model model){
+    public String viewDraft(Model model) {
         List<Draft> draftPosts = draftService.findAllDraftedPosts();
-        model.addAttribute("draftedPosts",draftPosts);
+        model.addAttribute("draftedPosts", draftPosts);
         return "draft";
     }
+
     @PostMapping("/draft-posts")
-    public String saveDraftPost(String title, String content, Model model){
-        draftService.saveDraft(title,content);
+    public String saveDraftPost(String title, String content, Model model) {
+        draftService.saveDraft(title, content);
         return "redirect:/draft";
     }
 
     @GetMapping("/delete/draft")
-    public String deleteDraftPost(@RequestParam(value = "draftId") UUID draftId){
+    public String deleteDraftPost(@RequestParam(value = "draftId") UUID draftId) {
         draftService.deleteDraftById(draftId);
         return "redirect:/draft";
     }
 
     @GetMapping("/edit/draft")
-    public String editDraft(@RequestParam(value = "draftId") UUID draftId,Model model){
+    public String editDraft(@RequestParam(value = "draftId") UUID draftId, Model model) {
         Draft draft = draftService.getDraftById(draftId);
-        model.addAttribute("editDraft",draft);
+        model.addAttribute("draftedPosts", draftService.findAllDraftedPosts().size());
+        model.addAttribute("editDraft", draft);
         return "edit";
     }
+
     @GetMapping("/update/draft")
-    public void updateDraft(UUID draftId,String title,String content){
-      draftService.updateDraftById(draftId,title,content);
+    public void updateDraft(UUID draftId, String title, String content) {
+        draftService.updateDraftById(draftId, title, content);
     }
 }
