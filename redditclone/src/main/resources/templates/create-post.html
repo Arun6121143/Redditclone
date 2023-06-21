@@ -372,6 +372,7 @@
         top: 24px;
         right: 39px;
       }
+
     </style>
     <script>
       function dropdown(event) {
@@ -430,6 +431,7 @@
         linkdiv.style.display = "none";
         polldiv.style.display = "grid";
       }
+
     </script>
 </head>
 <body>
@@ -442,7 +444,7 @@
         </div>
     </div>
 </div>
-<hr />
+<hr/>
 <div class="dropdown">
     <div class="circlecommunity">
         <div class="circle-dot"></div>
@@ -451,81 +453,84 @@
     </div>
 </div>
 <form th:action="@{/save-post}" method="post" enctype="multipart/form-data">
-<div id="communitydropdown">
-    <div class="profile">
-        <h6>Your Profile</h6>
-        <img class="profilepic"src="https://cdn2.iconfinder.com/data/icons/itty-bitty-animal-avatars/128/itty_bitty_tiger_01-64.png"/>
+    <div id="communitydropdown">
+        <div class="profile">
+            <h6>Your Profile</h6>
+            <img class="profilepic"
+                 src="https://cdn2.iconfinder.com/data/icons/itty-bitty-animal-avatars/128/itty_bitty_tiger_01-64.png"/>
 
-        <label class="username"><input type="radio" name="profilename" value="u/arun">
-            u/arun</label>
-    </div>
-    <hr class="bottomline" />
-    <div class="community">
-        <div class="communitybox">
-            <p>Your communities</p>
-            <a href="" class="createCommunity">Create New</a>
+            <label class="username"><input type="radio" name="profilename" value="u/arun">
+                u/arun</label>
         </div>
-        <div class="communitynames">
-            <select id="communityoptions" name="communityname">
-                <option value="arun">arun</option>
-                <option value="rahul">rahul</option>
-                <option value="yash">yash</option>
-            </select>
-        </div>
-    </div>
-</div>
-<div>
-    <div class="postbox">
-        <div class="postsection" onclick="postpage(event)">
-            <img width="50px" src="https://cdn0.iconfinder.com/data/icons/ui-essence/32/_48ui-64.png" />
-            <h3>Post</h3>
-        </div>
-        <div class="imagesection" onclick="imagepage(event)">
-            <img width="50px" src="https://cdn2.iconfinder.com/data/icons/photo-and-video-ui/140/_gallery-64.png"/>
-            <h3>Images and videos</h3>
-        </div>
-        <div class="Link" onclick="linkpage(event)">
-            <img width="50px" src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-67-256.png"/>
-            <h3>Link</h3>
-        </div>
-        <div class="poll" onclick="pollpage(event)">
-            <img width="50px" src="https://cdn3.iconfinder.com/data/icons/ui-ux-web-application-simplicon-set/102/list-items-64.png"/>
-            <h3>Poll</h3>
+        <hr class="bottomline"/>
+        <div class="community">
+            <div class="communitybox">
+                <p>Your communities</p>
+                <a href="" class="createCommunity">Create New</a>
+            </div>
+            <div class="communitynames">
+                <select id="communityoptions" name="communityname">
+                    <option value="arun">arun</option>
+                    <option value="rahul">rahul</option>
+                    <option value="yash">yash</option>
+                </select>
+            </div>
         </div>
     </div>
+    <div>
+        <div class="postbox">
+            <div class="postsection" onclick="postpage(event)">
+                <img width="50px" src="https://cdn0.iconfinder.com/data/icons/ui-essence/32/_48ui-64.png"/>
+                <h3>Post</h3>
+            </div>
+            <div class="imagesection" onclick="imagepage(event)">
+                <img width="50px" src="https://cdn2.iconfinder.com/data/icons/photo-and-video-ui/140/_gallery-64.png"/>
+                <h3>Images and videos</h3>
+            </div>
+            <div class="Link" onclick="linkpage(event)">
+                <img width="50px"
+                     src="https://cdn3.iconfinder.com/data/icons/streamline-icon-set-free-pack/48/Streamline-67-256.png"/>
+                <h3>Link</h3>
+            </div>
+            <div class="poll" onclick="pollpage(event)">
+                <img width="50px"
+                     src="https://cdn3.iconfinder.com/data/icons/ui-ux-web-application-simplicon-set/102/list-items-64.png"/>
+                <h3>Poll</h3>
+            </div>
+        </div>
         <div class="title">
-            <input type="text" placeholder="Tittle" name="title" required />
+            <input type="text" placeholder="Tittle" name="title" required/>
         </div>
         <div class="postbody" id="post">
             <textarea name="content" placeholder="Text(optional)"></textarea>
             <div class="buttons">
                 <div class="postsave">
-                  <input type="submit" name="draft" class="draft" value="save Draft" />
-                    <input class="save" type="submit" value="Post" />
+                    <input type="submit" name="draft" class="draft" value="save Draft"/>
+                    <input class="save" type="submit" value="Post"/>
                 </div>
             </div>
         </div>
         <div class="imagebody" id="image">
 
             <div class="imagefile">
-                <input type="file"  name="image" multiple accept="image/*,video/*">
+                <input type="file" name="image" multiple accept="image/*,video/*">
             </div>
             <div class="buttons">
                 <div class="imagesave">
-                    <input class="draft" type="submit" value="Cancel" />
-                    <input class="save" type="submit" value="Post" />
+                    <input class="draft" type="submit" name="cancel" value="Cancel"/>
+                    <input class="save" type="submit" value="Post"/>
                 </div>
             </div>
         </div>
 
         <div class="linkbody" id="link">
             <div class="linkurl">
-                <input type="url" name="url" placeholder="url" />
+                <input type="url" name="url" placeholder="url"/>
             </div>
             <div class="buttons">
                 <div class="linksave">
-                    <input class="draft" type="submit" value="save Draft" />
-                    <input class="save" type="submit" value="Post" />
+                    <input class="draft" name="link draft" type="submit" value="save Draft"/>
+                    <input class="save" type="submit" value="Post"/>
                 </div>
             </div>
         </div>
@@ -538,13 +543,13 @@
           ></textarea>
                 <div class="buttons">
                     <div class="pollsave">
-                        <input class="draft" type="submit" value="Cancel" />
-                        <input class="save" type="submit" value="Post" />
+                       <input class="draft" type="submit" name="cancel" value="Cancel"/><
+                        <input class="save" type="submit" value="Post"/>
                     </div>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 </form>
 </body>
 </html>
