@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PostService {
     @Autowired
     PostRepository postRepository;
+
     public void savePostUrl(String title, String url) {
         Post post = new Post();
         post.setTitle(title);
@@ -41,6 +43,15 @@ public class PostService {
         post.setContent(content);
         post.setUrl(url);
         post.setMediaList(savedMediaList);
+        post.setIsPublished(true);
+        postRepository.save(post);
+    }
+
+    public void saveDraftedPost(String title, String content, UUID draftId, String url) {
+        Post post = new Post();
+        post.setTitle(title);
+        post.setUrl(url);
+        post.setContent(content);
         post.setIsPublished(true);
         postRepository.save(post);
     }
