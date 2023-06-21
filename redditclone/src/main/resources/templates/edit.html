@@ -445,7 +445,7 @@
   <div class="box">
     <div class="drafts">
       <b><a href="">Drafts</a></b>
-      <span id="number">0</span>
+      <span id="number" th:text="${draftedPosts}"></span>
     </div>
   </div>
 </div>
@@ -508,7 +508,7 @@
       <div class="buttons">
         <div class="postsave">
           <input type="submit" name="edit-draft" class="draft" value="save Draft" />
-          <input class="save" type="submit" value="Post" />
+          <input class="save" name="post-draft" type="submit" value="Post" />
         </div>
       </div>
     </div>
@@ -519,7 +519,7 @@
       </div>
       <div class="buttons">
         <div class="imagesave">
-          <input class="draft" type="submit" value="Cancel" />
+          <input class="draft" name="cancel" type="submit" value="Cancel" />
           <input class="save" type="submit" value="Post" />
         </div>
       </div>
@@ -527,12 +527,12 @@
 
     <div class="linkbody" id="link">
       <div class="linkurl">
-        <input type="url" name="url" placeholder="url" />
+        <input type="url" th:value="${editDraft.draftUrl}" name="url" placeholder="url" />
       </div>
       <div class="buttons">
         <div class="linksave">
-          <input class="draft" type="submit" value="save Draft" />
-          <input class="save" type="submit" value="Post" />
+          <input class="draft" type="submit" name="update draft" value="update Draft" />
+          <input class="save" name="post-draft" type="submit" value="Post" />
         </div>
       </div>
     </div>
@@ -545,7 +545,7 @@
           ></textarea>
         <div class="buttons">
           <div class="pollsave">
-            <input class="draft" type="submit" value="Cancel" />
+            <input class="draft" name="cancel" type="submit" value="Cancel" />
             <input class="save" type="submit" value="Post" />
           </div>
         </div>
@@ -553,8 +553,5 @@
     </div>
   </div>
 </form>
-</body>
-</html>
-
 </body>
 </html>
